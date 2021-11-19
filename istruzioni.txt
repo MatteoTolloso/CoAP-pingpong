@@ -1,0 +1,10 @@
+Per avviare tutto: 
+$ docker-compose up
+
+Si possono modificare i parametri di avvio di client e server nel file docker-compose.yml alla label "command".
+Per il server si può sceglere la porta di ascolto, per il client si possono scegliere:
+- nome del server da contattate (deve essere il nome del container del server)
+- porta del server
+- numero di ping da mandare
+- ritardo tra due ping successivi (in secondi)
+
