@@ -1,0 +1,25 @@
+version: '3.7'
+
+networks:
+  ppnet:
+    driver: bridge
+
+services:
+  server_cont:
+    build: ./server # trova il Dockerfile per costruire l'immagine
+    image: server_img:latest # immagine da cui partire
+    networks:   # rete virtuale
+      - ppnet
+    command: /server/server 56789 # comando da lanciare all'avvio <porta in ascolto>
+
+  client_cont:
+    build: ./client
+    image: client_img:latest
+    networks: 
+      - ppnet
+    command: /client/client server_cont 56789 10 1 # <nome server> <porta> <numero di ping> <ritardo tra i ping (sec)>
+    depends_on:  # non lancio il client se non si è avviato il server
+      - server_cont
+
+
+
